@@ -1,0 +1,107 @@
+form { display: none;}
+
+body {
+	padding: 0px;
+	text-align: center;
+	font-size: 50px;
+}
+#hostname {
+	margin-bottom: 150px;
+	text-align: center;
+	width: 100%;
+}
+.i {
+	font-style: italic;
+	font-family: 'Quicksand', sans-serif;
+}
+#wrapper{
+	font-family: 'Oswald', sans-serif;
+	margin: 0px;
+	width: 100%;
+	clear: both;
+	background-color: #c51a4a;
+	padding: 90px;
+	border-style: none;
+	border-radius: 0px;
+	border-width: 0px;
+	box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0.0);
+}
+#logout{
+	width: 100%;
+	height: 100px;
+	margin-bottom: 80px;
+	margin-top: 35px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 40px;
+}
+#counter{
+	float: right;
+	width: 160px;
+	margin-top: 0px;
+	text-align: left;
+	margin-left: auto;
+	margin-bottom: 5px;
+}
+#footer{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+.logout {
+	border-radius: 5px;
+	background-color: black;
+	border: none;
+	color: white;
+	padding: 20px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 40px;
+	width: 80%;
+	margin-top: 20px;
+}
+.logout: hover {
+	background-color: grey;
+}
+img {
+	margin-top: 40px;
+}
+.button {
+	border-radius: 5px;
+	background-color: #6cc04a;
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 75px;
+	margin-right: 5px;
+	margin-bottom: 40px;
+	width: 85%;
+}
+.button: hover{
+	background-color: #556B2F;
+}
+#logging {
+	float: left;
+	margin-left: 120px;
+	margin-bottom: 5px;
+}
+#counter{
+	float: left;
+	width: 100px;
+	margin-top: 0px;
+	text-align: left;
+	margin-left: auto;
+	margin-bottom: 10px;
+}
+h2 {
+	margin-bottom: 40px;
+	font-size: 100px;
+}
+.lite {
+	font-style: italic;
+	color: white;
+	opacity: 0.3;
+}
