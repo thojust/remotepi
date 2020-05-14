@@ -2,13 +2,13 @@
 <?php 
   
   // Load an image from jpeg URL 
-  $im = imagecreatefromjpeg( 
-  'https://media.geeksforgeeks.org/wp-content/uploads/20200123100652/geeksforgeeks12.jpg'); 
+ imagecreatefromjpeg( 
+  'https://www.thetelegram.com/media/photologue/photos/cache/GS__4_-_rainbow_Brian_Hay_Granville_Ferry_NS_large.jpg'); 
     
   // View the loaded image in browser using imagejpeg() function 
   header('Content-type: image/jpg');   
   // Decrease the quality of image to 2 
-  imagejpeg($im, null, 2); 
-  imagedestroy($im); 
+  imagejpeg($im); 
+ 
   ?> 
   
