@@ -8,7 +8,8 @@
   // View the loaded image in browser using imagejpeg() function 
   header('Content-type: image/jpg');   
   // Decrease the quality of image to 2 
-  imagejpeg($im); 
+  imagejpeg($im);  
+  echo "did it work";
  
   ?> 
   
