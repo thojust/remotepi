@@ -66,9 +66,9 @@
 
 ### and edit this part to reflect this: 
 
-<<Directory /var/www/>
+\<Directory /var/www/>
 AllowOverride All 
-<</Directory> "
+\</Directory\> 
 
 
 ## STEP 8  ### Restart Apache 
