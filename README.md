@@ -1,5 +1,5 @@
 
-##Compiled by Justin Thomas 2020 ### 
+## Compiled by Justin Thomas 2020 ### 
 ### thojust@gmail.com ######
 
 ### Credits ####
@@ -30,7 +30,7 @@ sudo pip install psutil flask
 
 
 ## STEP 5 ###
-## Make sure our python directory is writable & X (notably reboot.log is writable)
+### Make sure our python directory is writable & X (notably reboot.log is writable)
 
 sudo chmod 777 /var/www/html/remote/python/
 sudo chmod 777 /var/www/html/remote/python/reboot.log
