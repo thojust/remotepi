@@ -1,5 +1,8 @@
 ﻿<?php
 include 'db.inc.php';
+$path= __DIR__;
+$dir= explode("/",$path);
+$curr_dir= end($dir);
 session_start();/// open session to read session data passed from loading.php
 /*## Compiled by Justin Thomas 2020 ###
 ### thojust@gmail.com ######
@@ -92,7 +95,7 @@ function reboot(){
 
 /// LOGOUT
    function logout() {
-          window.location="http://fakeuser:fake@<?php echo $hostname;?>.local/remote/logout/";
+          window.location="http://fakeuser:fake@<?php echo $hostname . "/" . $curr_dir;?>/logout/";
      }
 
      function refreshpage() {
@@ -120,7 +123,7 @@ $output[2] = exec('python /var/www/html/remote/python/temp.py'); $output[3] = ex
             var count = div.textContent * 1 - 1;
             div.textContent = count;
             if (count <= 0) {
-                window.location.replace("http://fakeuser:fake@<?php echo $hostname;?>.local/remote/logout/");
+                window.location.replace("http://fakeuser:fake@<?php echo $hostname . "/" . $curr_dir;?>/logout/");
             }
         }, 1000);
     </script>

@@ -1,3 +1,5 @@
 AuthType Basic
 AuthUserFile /etc/apache2/.htpasswd
-Require user fakeuser
+AuthName "Enter password"
+Require user admin
+

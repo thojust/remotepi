@@ -1,5 +1,9 @@
 <?php 	
 session_destroy();
 $hostname=gethostname();
-header("Location: http://$hostname.local/remote/");
-	exit();?>
+$path= __DIR__;
+$dir= explode("/",$path);
+$curr = $dir[count($dir)-2];
+header("Location: http://$hostname/remotepi/");	
+exit();
+?>

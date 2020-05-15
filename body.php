@@ -2,5 +2,14 @@
 <head></head>
 <body>
 </body>
-<?php echo __DIR__;?>
+<?php 
+$path= __DIR__;
+$dir= explode("/",$path);
+$curr_dir= end($dir);
+
+
+echo $_SERVER['REQUEST_URI'];
+
+
+?>
 </html>
