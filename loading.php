@@ -13,7 +13,7 @@ localStorage.clear();
 function loading() {
 
   //document.getElementById("loading_form").submit();// Form submission
-  window.location="http://<?php echo $hostname;?>.local/remote/";
+  window.location="http://<?php echo $hostname;?>.local/remotepi/";
      }
 
 
