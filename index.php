@@ -1,9 +1,11 @@
 ﻿<?php
+session_start();
 include 'db.inc.php';
 $path= __DIR__;
 $dir= explode("/",$path);
 $curr_dir= end($dir);
-session_start();/// open session to read session data passed from loading.php
+
+/// open session to read session data passed from loading.php
 /*## Compiled by Justin Thomas 2020 ###
 ### thojust@gmail.com ######
 
@@ -15,7 +17,7 @@ session_start();/// open session to read session data passed from loading.php
 
 ### See python/config.tx for full install instructions */
 $from=$_SERVER['HTTP_REFERER']; // see where they came from
-if(isset($_SESSION['home'])){ $home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
+if(isset($_SESSION['home'])){ session_start(); $home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
 $starttime = microtime(true); // Top of page// timing how long page takes to load 
 $success= $_GET['success'];//Return message after Reboot or Shutdown
 session_start();
@@ -108,8 +110,8 @@ function reboot(){
 <script> $("html").fadeOut(0);$("html").fadeIn(3000);</script>
 <div id="wrapper"><div  class="lite" id= "hostname"><?php echo  $hostname; ?><div id="logout"><input class="logout"type="button" id="logout"  value="logout" onClick="logout()"/></div></div><?php echo $message;?>
 <?php if(empty($success)) : ?>
-<?php $stats= explode(',',exec('python /var/www/html/remote/python/stats.py')); echo  " storage: " . $stats[1] . "% full /memory:  " . $stats[0] . "% <br>";
-$output[2] = exec('python /var/www/html/remote/python/temp.py'); $output[3] = exec('python /var/www/html/remote/python/cpuload.py') * 10 . "%";echo "temp: ". $output[2] . "°C / cpu load: " . $output[3];?>
+<?php $stats= explode(',',exec("python /var/www/html/$curr_dir/python/stats.py")); echo  " storage: " . $stats[1] . "% full /memory:  " . $stats[0] . "% <br>";
+$output[2] = exec("python /var/www/html/$curr_dir/python/temp.py"); $output[3] = exec("python /var/www/html/$curr_dir/python/cpuload.py") * 10 . "%";echo "temp: ". $output[2] . "°C / cpu load: " . $output[3];?>
 <div id="footer"><input class="button"type="button" id="shutdown"  value="shutdown" onClick="shutdown()"/>
 <input class="button"type="button" id="reboot"  value="reboot" onClick="reboot()"/><input class="button"type="button" id="refresh"  value="reload" onClick="refreshpage()"/></div>
 <div class="hide"><form action="" method="post" id="reboot_form"><input type="hidden" value="reboot" name="status"/></form>

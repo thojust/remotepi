@@ -9,7 +9,7 @@ st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 #
 # Open a file and allow content to be appended to it
 #
-f = open('/var/www/html/remote/python/reboot.log', 'a')
+f = open('/var/www/html/remotepi/python/reboot.log', 'a')
 
 # write the timestamp and text to the file
 f.write(st)
