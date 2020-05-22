@@ -6,14 +6,25 @@ ts = time.time()
 import datetime
 st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-#
-# Open a file and allow content to be appended to it
-#
-f = open('/var/www/html/remotepi/python/reboot.log', 'a')
+###### Log boot in database 
+import mysql.connector
 
-# write the timestamp and text to the file
-f.write(st)
-f.write(' : SHUTDOWN command issued\n')
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="admin",
+  passwd="relax",
+  database="pi_stats"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO log (time, action) VALUES ('%s', 'shutdown')" %(st)
+mycursor.execute(sql)
+
+
+mydb.commit()
+
+print(mycursor.rowcount, "record inserted.")
 
 ###Wait 5 sec to refresh the browser#####
 time.sleep(5)

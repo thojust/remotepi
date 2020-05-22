@@ -40,7 +40,25 @@ while ($row = mysqli_fetch_array($result))
 {
 $guide[] = array('sec' =>$row['AVG(sec)']);
 }
+//QUERY FOR DISPLAYING DATA # 222222
+//END ERROR HANDELING WITH CONNECITONS
+$result = mysqli_query($link, "SELECT AVG(temp) FROM temp");
+
+
+// SET ARRAYS
+if (!$result)
+{
+$error = "Error fetching jokes: " . mysqli_error($link);
+echo $error;
+exit();
+}
+while ($row = mysqli_fetch_array($result))
+{
+$tempz[] = array('temp' =>$row['AVG(temp)']);
+}
 //QUERY FOR DISPLAYING DATA
+
+
 
 ////GET BROWSER AND OS DATA
 
