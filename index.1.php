@@ -1,25 +1,21 @@
-﻿<?php
-session_start();
+<?php
 include 'db.inc.php';
 $path= __DIR__;
 $dir= explode("/",$path);
 $curr_dir= end($dir);
-
-/// open session to read session data passed from loading.php
+session_start();/// open session to read session data passed from loading.php
 /*## Compiled by Justin Thomas 2020 ###
 ### thojust@gmail.com ######
-
 ### Credits ####
 ####based on tutorial here: https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2014/04/02/pi-webpage-reboot
 #### and setting up .htaccess https://www.debiantutorials.com/password-protecting-a-directory-with-apache-and-htaccess/
 #### and setting up apache and install php https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md
 #### and stats python code taken https://learn.pimoroni.com/tutorial/networked-pi/raspberry-pi-system-stats-python
-
 ### See python/config.tx for full install instructions */
 $from=$_SERVER['HTTP_REFERER']; // see where they came from
-if(isset($_SESSION['home'])){$home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
+if(isset($_SESSION['home'])){ $home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
 $starttime = microtime(true); // Top of page// timing how long page takes to load 
-if(isset($_GET['success'])) {$success=$_GET['success'];}//Return message after Reboot or Shutdown
+$success= $_GET['success'];//Return message after Reboot or Shutdown
 session_start();
 $_SESSION['selfform']=1;
 if(isset($_POST['status']) && $_SESSION['selfform']==1){$status = $_POST['status'];session_destroy();} //// Receive variables when Reboot or Shutdown is submited from this page to this page
@@ -38,13 +34,13 @@ $hostname= gethostname(); //name of raspi your controling
 //// Run command if received
 
 if ($status == "reboot"){
-	exec("python /var/www/html/remotepi/python/reboot.py > /dev/null &");
+	exec("python /var/www/html/remote/python/reboot.py > /dev/null &");
 	header('Location: .?success=1');
 exit();
 }
 
 else if ($status == "shutdown"){
-	exec("python /var/www/html/remotepi/python/shutdown.py > /dev/null &");
+	exec("python /var/www/html/remote/python/shutdown.py > /dev/null &");
 	header('Location: .?success=2');
 	exit();
 }
@@ -110,8 +106,8 @@ function reboot(){
 <script> $("html").fadeOut(0);$("html").fadeIn(3000);</script>
 <div id="wrapper"><div  class="lite" id= "hostname"><?php echo  $hostname; ?><div id="logout"><input class="logout"type="button" id="logout"  value="logout" onClick="logout()"/></div></div><?php echo $message;?>
 <?php if(empty($success)) : ?>
-<?php $stats= explode(',',exec("python /var/www/html/$curr_dir/python/stats.py")); echo  " storage: " . $stats[1] . "% full /memory:  " . $stats[0] . "% <br>";
-$output[2] = exec("python /var/www/html/$curr_dir/python/temp.py"); $output[3] = exec("python /var/www/html/$curr_dir/python/cpuload.py") * 10 . "%";echo "temp: ". round($output[2],2) . "°C / cpu load: " . $output[3];?>
+<?php $stats= explode(',',exec('python /var/www/html/remote/python/stats.py')); echo  " storage: " . $stats[1] . "% full /memory:  " . $stats[0] . "% <br>";
+$output[2] = exec('python /var/www/html/remote/python/temp.py'); $output[3] = exec('python /var/www/html/remote/python/cpuload.py') * 10 . "%";echo "temp: ". $output[2] . "°C / cpu load: " . $output[3];?>
 <div id="footer"><input class="button"type="button" id="shutdown"  value="shutdown" onClick="shutdown()"/>
 <input class="button"type="button" id="reboot"  value="reboot" onClick="reboot()"/><input class="button"type="button" id="refresh"  value="reload" onClick="refreshpage()"/></div>
 <div class="hide"><form action="" method="post" id="reboot_form"><input type="hidden" value="reboot" name="status"/></form>
@@ -135,22 +131,17 @@ $output[2] = exec("python /var/www/html/$curr_dir/python/temp.py"); $output[3] =
 <?php // Code
 $endtime = microtime(true); // Bottom of page
 $loadtime= round($endtime - $starttime,2);
-echo "<p class=\"lite\">Loaded in " . $loadtime . " seconds."; foreach ($guide as $guide){echo " Average  is " . round($guide['sec'],2) . " seconds </p>";} foreach ($tempz as $tempz){echo "<p class=\"lite\"> Average temp is " . round($tempz['temp'],2) . "°C </p>";}
+echo "<p class=\"lite\">Loaded in " . $loadtime . " seconds."; foreach ($guide as $guide){echo " Average  is " . round($guide['sec'],2) . " seconds </p>";}
 // INSERT LOAD TIME INTO DB
 $browser=$user_browser;
 $os= $user_os;
 $date=date("Y-m-d H:i:s");
-$sql = "INSERT INTO pageload (sec, dates, browser,os,cpu) VALUES ('$loadtime', '$date', '$browser', '$os' , '$output[3]')";
-$sql2 = "INSERT INTO temp (temp,time) VALUES ( '$output[2]','$date')";
+$sql = "INSERT INTO pageload (sec, dates, browser,os)
+VALUES ('$loadtime', '$date', '$browser', '$os')";
 if ($link->query($sql) === TRUE) { // enter the data!  
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
   $link->close();}
-
-  if ($link->query($sql2) === TRUE) { // enter the data!  
-  } else {
-    echo "Error: " . $sql2 . "<br>" . $conn->error;
-    $link->close();}
-   ?>
+$link->close(); ?>
 </div><img src="images/logoT.png">
 </body>

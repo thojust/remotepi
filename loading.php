@@ -16,7 +16,7 @@ localStorage.clear();
 function loading() {
 
   //document.getElementById("loading_form").submit();// Form submission
-  window.location="http://<?php echo $hostname . "/" . $curr_dir;?>";
+  window.location="http://<?php echo $hostname . ".local" . "/" . $curr_dir;?>";
      }
 
 
