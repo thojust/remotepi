@@ -1,0 +1,47 @@
+https://gist.github.com/anunay/7698181  /// Install Autoconf
+http://xdebug.org/files/xdebug-2.9.5.tgz
+##2 
+
+
+
+Summary
+
+    Xdebug installed: no
+    Server API: Apache 2.0 Handler
+    Windows: no
+    Zend Server: no
+    PHP Version: 7.1.33
+    Zend API nr: 320160303
+    PHP API nr: 20160303
+    Debug Build: no
+    Thread Safe Build: no
+    OPcache Loaded: no
+    Configuration File Path: /etc
+    Configuration File: /etc/php.ini
+    Extensions directory: /usr/lib/php/extensions/no-debug-non-zts-20160303
+
+Instructions
+
+    Download xdebug-2.9.5.tgz
+    Install the pre-requisites for compiling PHP extensions.
+    On your Mac, we only support installations with 'homebrew', and brew install php && brew install autoconf should pull in the right packages.
+    Unpack the downloaded file with tar -xvzf xdebug-2.9.5.tgz
+    Run: cd xdebug-2.9.5
+
+    Run: phpize (See the FAQ if you don't have phpize).
+
+    As part of its output it should show:
+
+    Configuring for:
+    ...
+    Zend Module Api No:      20160303
+    Zend Extension Api No:   320160303
+
+    If it does not, you are using the wrong phpize. Please follow this FAQ entry and skip the next step.
+    Run: ./configure
+    Run: make
+    Run: cp modules/xdebug.so /usr/lib/php/extensions/no-debug-non-zts-20160303
+    Create /etc/php.ini and add the line
+    zend_extension = /usr/lib/php/extensions/no-debug-non-zts-20160303/xdebug.so
+    Restart the webserver
+

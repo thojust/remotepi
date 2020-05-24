@@ -17,9 +17,9 @@ $curr_dir= end($dir);
 
 ### See python/config.tx for full install instructions */
 $from=$_SERVER['HTTP_REFERER']; // see where they came from
-if(isset($_SESSION['home'])){ session_start(); $home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
+if(isset($_SESSION['home'])){$home= $_SESSION['home'];session_destroy();} /// see if loading.php is needed
 $starttime = microtime(true); // Top of page// timing how long page takes to load 
-$success= $_GET['success'];//Return message after Reboot or Shutdown
+if(isset($_GET['success'])) {$success=$_GET['success'];};//Return message after Reboot or Shutdown
 session_start();
 $_SESSION['selfform']=1;
 if(isset($_POST['status']) && $_SESSION['selfform']==1){$status = $_POST['status'];session_destroy();} //// Receive variables when Reboot or Shutdown is submited from this page to this page
@@ -38,13 +38,13 @@ $hostname= gethostname(); //name of raspi your controling
 //// Run command if received
 
 if ($status == "reboot"){
-	exec("python /var/www/html/$curr_dir/python/reboot.py > /dev/null &");
+	exec("python /var/www/html/remotepi/python/reboot.py > /dev/null &");
 	header('Location: .?success=1');
 exit();
 }
 
 else if ($status == "shutdown"){
-	exec("python /var/www/html/$curr_dir/python/shutdown.py > /dev/null &");
+	exec("python /var/www/html/remotepi/python/shutdown.py > /dev/null &");
 	header('Location: .?success=2');
 	exit();
 }
