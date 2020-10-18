@@ -30,7 +30,7 @@ sudo pip install psutil flask
 
 
 ## STEP 5 ###
-## Make sure our python directory is writable & X (notably reboot.log is writable)
+## Make sure our python directory is writable & X (notably reboot.log is writable) ### Find a better way then chmod 777 if possible!!! 
 
 sudo chmod 777 /var/www/html/remote/python/
 sudo chmod 777 /var/www/html/remote/python/reboot.log
